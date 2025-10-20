@@ -9,7 +9,7 @@ export default function AddVehiclePage() {
       <div className="min-h-screen flex flex-col items-center justify-center p-6">
         <div className="w-full  rounded-2xl  p-8">
           <h1 className="text-3xl font-bold mb-6 text-center">
-            🚗 የተሽከርካሪ መመዝገቢያ / Vehicle Registration
+            የተሽከርካሪ መመዝገቢያ <br /> Vehicle Registration
           </h1>
           <VehicleForm />
         </div>

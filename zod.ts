@@ -58,3 +58,32 @@ export const vehicleSchema = z.object({
 });
 
 export type VehicleFormData = z.infer<typeof vehicleSchema>;
+
+
+export const driverLicenseSchema = z
+  .object({
+    fullName: z.string().min(1, "Full name is required"),
+    birthPlace: z.string().min(1, "Birth place is required"),
+    dateOfIssue: z.string().min(1, "Date of issue is required"),
+    expireDate: z.string().min(1, "Expire date is required"),
+    sex: z.string().min(1, "Sex is required"),
+    age: z.string().min(1, "Age is required"),
+    district: z.string().min(1, "District is required"),
+    region: z.string().min(1, "Region is required"),
+    receiptNumber: z.string().min(1, "Receipt number is required"),
+    level: z.string().min(1, "Licence level is required"),
+  })
+  .refine(
+    (data) => {
+      const issue = new Date(data.dateOfIssue);
+      const expire = new Date(data.expireDate);
+      return expire > issue; // must expire *after* issue date
+    },
+    {
+      message: "Expiry date must be after the issue date.",
+      path: ["expireDate"], // attach error to the expiry date field
+    }
+  );
+
+export type DriverLicenseFormData = z.infer<typeof driverLicenseSchema>;
+
